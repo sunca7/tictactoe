@@ -1,4 +1,4 @@
-const winningCombos = [
+const winning = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -44,11 +44,7 @@ function render() {
   });
 
   const text =
-    win === "T"
-      ? `That's a tie!`
-      : win
-      ? `${win} wins the game!`
-      : `It's ${turn}'s turn!`;
+    win === "T" ? `That's a tie!` : win ? `${win} wins the game!` : 0;
   document.querySelector(".player_one .fas").style.opacity =
     turn === "X" ? 1 : 0;
   document.querySelector(".player_two .fas").style.opacity =
@@ -85,7 +81,7 @@ function changeTurn(event) {
 
 function getWinner() {
   let winner = null;
-  winningCombos.forEach(function(combo, index) {
+  winning.forEach(function(combo, index) {
     if (
       board[combo[0]] &&
       board[combo[0]] === board[combo[1]] &&

@@ -24,8 +24,6 @@ document
 
 function init(hard) {
   board = ["", "", "", "", "", "", "", "", ""];
-  timer = new Date().getTime() + 60 * 1000 * 3;
-  renderTimer();
   if (hard) {
     oneScore = 0;
     twoScore = 0;
@@ -39,10 +37,10 @@ function init(hard) {
 init(true);
 
 function render() {
-  board.forEach(function(mark, index) {
+  board.forEach(function (mark, index) {
     squares[index].textContent = mark;
   });
-
+  timer = new Date().getTime() + 60 * 1000 * 3;
   const text =
     win === "T" ? `That's a tie!` : win ? `${win} wins the game!` : 0;
   document.querySelector(".player_one .fas").style.opacity =
@@ -59,7 +57,7 @@ function render() {
 }
 
 function changeTurn(event) {
-  let idx = squares.findIndex(function(square) {
+  let idx = squares.findIndex(function (square) {
     return square === event.target;
   });
 
@@ -81,7 +79,7 @@ function changeTurn(event) {
 
 function getWinner() {
   let winner = null;
-  winning.forEach(function(combo, index) {
+  winning.forEach(function (combo) {
     if (
       board[combo[0]] &&
       board[combo[0]] === board[combo[1]] &&
@@ -100,7 +98,6 @@ function renderTimer() {
 }
 
 setInterval(() => {
-  const date = new Date().setTime(timer - new Date().getTime());
   if (timer < new Date().getTime()) {
     alert("Your time is done");
     init(true);
